@@ -31,6 +31,8 @@ class adminstate(StatesGroup):
     change_prject = State()
     name = State()
     username = State()
+    write_group = State()
+    write = State()
 
 
 
@@ -46,3 +48,7 @@ class adminusrstate(StatesGroup):
 class deletestate(StatesGroup):
     change_delete = State()
     delete = State()
+
+
+class shikoyatstate(StatesGroup):
+    shikoyat = State()

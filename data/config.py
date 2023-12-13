@@ -11,6 +11,10 @@ USER_CHANNEL = env.str("USER_CHANNEL") # Userlar kanali
 PROJECT_CHANNEL = env.str("PROJECT_CHANNEL") #Zakaz proyektlar kanali
 CODE_CHANNEL = env.str("CODE_CHANNEL") #codlar kanali
 PASSWORD_ADMIN = env.str("PASSWORD_ADMIN") #Admin panel kod
+SHIKOYATLAR = env.str("SHIKOYATLAR")    
+GURUH = env.str("GURUH")
+
+
 
 DB_USER = env.str("DB_USER")
 DB_PASS = env.str("DB_PASS")

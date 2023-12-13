@@ -5,7 +5,7 @@ from data.config import ADMINS, USER_CHANNEL, PASSWORD_ADMIN
 from utils.extra_datas import make_title
 import pandas as pd
 import asyncio
-from keyboards.default.main_btn import admin_markup, project_markup, back_markup, usr_markup, main_markup, delete_markup
+from keyboards.default.main_btn import admin_markup, project_markup, back_markup, usr_markup, main_markup, delete_markup, group_markup
 from states.main_state import adminstate, adminwebstate, adminusrstate, reklamastate, main, deletestate
 from aiogram.dispatcher.storage import FSMContext
 from aiogram.types import ReplyKeyboardRemove
@@ -17,12 +17,16 @@ from aiogram.types import ReplyKeyboardRemove
 async def confirm_password(message: types.Message):
     user_id  = message.from_user.id
     parol = str(message.text)
-    if parol == PASSWORD_ADMIN:
-        await message.answer("Admin panelga xush kelibsiz 👋🧑🏻", reply_markup=admin_markup)
-        await message.delete()
-        await adminstate.admin_menu.set()
-    else:
-        await message.answer("Parol noto'g'ri ❌")
+    try:
+        if parol == PASSWORD_ADMIN:
+            await message.answer("Admin panelga xush kelibsiz 👋🧑🏻", reply_markup=admin_markup)
+            await message.delete()
+            await adminstate.admin_menu.set()
+
+        else:
+            await message.answer("Parol noto'g'ri ❌")
+    except:
+        await message.answer("Texnik nosozlik yuz berdi iltimos adminga habar bering !")
 
 
 
@@ -166,11 +170,39 @@ async def send_ad_to_all(message: types.Message):
         except:
             for admin in ADMINS:
                 await bot.send_message(chat_id=admin, text=f"<b>{user['full_name']}</b> botni blocklagan 🫣")
+                
     await message.answer("Reklama muvofaqiyatli tarqatildi ✅", reply_markup=ReplyKeyboardRemove() and admin_markup)
     await adminstate.admin_menu.set()
 
 
 
+
+@dp.message_handler(text = "✍️ Guruhga yozish", state=adminstate.admin_menu)
+async def write(message: types.Message):
+    await message.answer("Qaysi guruhga yozmoqchisiz ?", reply_markup=ReplyKeyboardRemove and group_markup)
+    await adminstate.write_group.set()
+
+
+@dp.message_handler(text = "Qarindoshlar", state=adminstate.write_group)
+async def chose_group(message: types.Message):
+    await message.answer(f"Nima deb yozmoqchisiz ?", reply_markup=ReplyKeyboardRemove() and back_markup)  
+    await adminstate.write.set()
+
+
+@dp.message_handler(state=adminstate.write)
+async def chose_group(message: types.Message):
+    await bot.send_message(chat_id=1636779278, text= message.text)
+
+
+@dp.message_handler(text = "Sinfdoshlar", state=adminstate.write_group)
+async def chose_group(message: types.Message):
+    await message.answer(f"Nima deb yozmoqchisiz ?", reply_markup=ReplyKeyboardRemove() and back_markup)  
+    await adminstate.write.set()
+
+
+@dp.message_handler(state=adminstate.write)
+async def chose_group(message: types.Message):
+    await bot.send_message(chat_id=1636779278, text= message.text)
 
 
 @dp.message_handler(text = "🗑 O'chirish", state=adminstate.admin_menu)
