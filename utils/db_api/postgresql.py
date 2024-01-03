@@ -76,8 +76,6 @@ class Database:
         await self.execute(sql, execute=True)
 
 
-    
-
     @staticmethod
     def format_args(sql, parameters: dict):
         sql += " AND ".join(
@@ -120,6 +118,12 @@ class Database:
         return await self.execute(sql, *parameters, fetchrow=True)
     
 
+    async def select_vacance(self, **kwargs):
+        sql = "SELECT * FROM vacance WHERE "
+        sql, parameters = self.format_args(sql, parameters=kwargs)
+        return await self.execute(sql, *parameters, fetchrow=True)
+    
+
     async def select_bot(self, **kwargs):
         sql = "SELECT * FROM bots WHERE "
         sql, parameters = self.format_args(sql, parameters=kwargs)
@@ -150,10 +154,11 @@ class Database:
     async def delete_users(self):
         await self.execute("DELETE FROM Users WHERE TRUE", execute=True)
 
-
     async def delete_bot(self):
         await self.execute("DELETE FROM Bots WHERE TRUE", execute=True)
 
+    async def delete_bot(self):
+        await self.execute("DELETE FROM Bots WHERE TRUE", execute=True)
 
     async def delete_site(self):
         await self.execute("DELETE FROM sites WHERE TRUE", execute=True)

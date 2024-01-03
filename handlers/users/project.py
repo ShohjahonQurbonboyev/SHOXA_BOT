@@ -1,12 +1,12 @@
-import asyncio
 from aiogram import types
-from data.config import ADMINS, PROJECT_CHANNEL, CODE_CHANNEL
+from data.config import PROJECT_CHANNEL, ADMINS
 from loader import dp, db, bot
 from keyboards.default.main_btn import  main_markup, change_markup, back_markup, my_project_markup
-from keyboards.inline.inline_main import kanal, kino_kanal
-from states.main_state import mystate, main, changestate, myprojects
+from keyboards.inline.inline_main import kanal, kino_kanal, github
+from states.main_state import main, changestate, myprojects
 from aiogram.types import ReplyKeyboardRemove
-from aiogram.dispatcher.storage import FSMContext
+
+
 
 
 
@@ -116,30 +116,19 @@ async def my_projects_channel(message: types.Message):
 
 @dp.message_handler(text="🌐 GitHub", state=myprojects.change)
 async def my_codes_github(message: types.Message):  
-    url="https://github.com/SHOXAonion"
     user_id = message.from_user.id
-    photo = "pictures/github.png"
-    msg = await message.answer("Iltimos kuting...🕒")
+    photo = "https://kinsta.com/wp-content/uploads/2018/04/what-is-github-1-1.png"
     try:
-        with open(photo, 'rb') as photo:
-            await message.answer_photo(photo=photo, caption=f"Bu mening GitHub sahifam:\n{url}", reply_markup=my_project_markup)
-            await msg.delete()
-    except:
-        await message.answer("Rasm jo'natishda xatolik ⚠️")
+
+        await message.answer_photo(photo=photo, caption=f"Assalomu aleykum mening GitHub saxifamga hush kelibsiz.\nAgar GitHubda ro`yhatdan o`tmagan bo`lsangiz royhatdan o`tib keyin tekshirishingz mumkin !", reply_markup=github)
+    except Exception as ex:
+        await bot.send_message(chat_id=ADMINS[0], text=ex)
+        
+
 
 
 
 @dp.message_handler(text = "🎦 Kanallar", state=main.main_menu)
 async def movie(message: types.Message):
-    photo_url = "pictures/cinema.jpg"
-    try: 
-        with open(photo_url, "rb") as photo_url:
-            await message.answer_photo( photo=photo_url, caption = "<b>Virtual cinema</b>\n bu kanalda qiziqarli kinolar toplami mavjud kirish uchun pastdagi tugmani bosing ! 👇", reply_markup=kino_kanal)
-    except:
-        await message.answer("Texnik nosozlik yuz berdi iltomos adminga xabar bering !")
-    
-
-@dp.message_handler(text = "🛍 Online shop", state=main.main_menu)
-async def online_shop(message: types.Message):
-    name = message.from_user.full_name
-    await message.answer(f"Xurmatli {name} !\nBu xizmatimiz dasturchilarimiz tomonidan ishlab chiqilmoqda tez orada bu xizmatimiz ham qo`shiladi 😇")
+    photo_url = "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/09/cover.webp?ssl=1&quality=80&w=f"
+    await message.answer_photo(photo=photo_url, caption = "<b>Bizning ochiq kanllar toplamiga hush kelibsiz va kirish uchun pastdagi tugmalardan birini bosing ! 👇</b>", reply_markup=kino_kanal)

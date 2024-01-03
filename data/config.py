@@ -13,6 +13,7 @@ CODE_CHANNEL = env.str("CODE_CHANNEL") #codlar kanali
 PASSWORD_ADMIN = env.str("PASSWORD_ADMIN") #Admin panel kod
 SHIKOYATLAR = env.str("SHIKOYATLAR")    
 GURUH = env.str("GURUH")
+VAKANSIYA = env.str("VAKANSIYA")
 
 
 

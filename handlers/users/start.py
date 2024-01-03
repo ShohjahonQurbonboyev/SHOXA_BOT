@@ -6,7 +6,7 @@ from utils.extra_datas import make_title
 from keyboards.default.main_btn import contact, main_markup
 from states.main_state import phonestate, main
 from aiogram.dispatcher.storage import FSMContext
-from aiogram.types import ReplyKeyboardRemove
+
 
 
 
@@ -19,7 +19,6 @@ async def bot_start(message: types.Message, state: FSMContext):
     if user is None:
         await message.answer(f"Assalomu Aleykum \nBotga hush kelibsiz {full_name} 👋🤓")
         await message.answer("Botdan foydalanish uchun telefon raqamingizni ulashishingiz zarur !\n<i>\"Malumotlaringiz 100% maxfiy saqlanishiga kafolat beramiz !\"</i>", reply_markup=contact)
-
         await phonestate.phone.set()
         # ADMINGA xabar beramiz
     else:
@@ -27,7 +26,7 @@ async def bot_start(message: types.Message, state: FSMContext):
         await main.main_menu.set()
     
 @dp.message_handler(content_types=['contact'], state=phonestate.phone)
-async def get_phone(message: types.Message, state: FSMContext):
+async def get_phone(message: types.Message):
     username = message.from_user.username
     telegram_id = message.from_user.id
     contact = message.contact.phone_number
@@ -46,8 +45,10 @@ async def get_phone(message: types.Message, state: FSMContext):
         await message.delete()
         await message.answer("Ma`lumotlaringiz saqlandi botdan foydalanishingiz mumkin 😌")
         try:
+            msg = await message.answer('Iltimos kuting...⏱')
             with open(audio, "rb") as audio:
                 await message.answer_voice(voice= audio)
+                await msg.delete()
         except:
             await message.answer("Texnik xatolik yuzaga keldi iltimos adminga xabar bering ?")
         await message.answer("Siz Asosiy menudasiz 🏠", reply_markup=main_markup)

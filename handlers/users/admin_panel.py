@@ -1,15 +1,13 @@
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart
 from loader import dp, db, bot
-from data.config import ADMINS, USER_CHANNEL, PASSWORD_ADMIN
-from utils.extra_datas import make_title
+from data.config import ADMINS,  PASSWORD_ADMIN
 import pandas as pd
 import asyncio
-from keyboards.default.main_btn import admin_markup, project_markup, back_markup, usr_markup, main_markup, delete_markup, group_markup
-from states.main_state import adminstate, adminwebstate, adminusrstate, reklamastate, main, deletestate
+from keyboards.default.main_btn import admin_markup, project_markup, back_markup, usr_markup,  delete_markup, group_markup
+from states.main_state import adminstate, adminwebstate, adminusrstate, reklamastate, deletestate
 from aiogram.dispatcher.storage import FSMContext
 from aiogram.types import ReplyKeyboardRemove
-
 
 
 
@@ -22,7 +20,6 @@ async def confirm_password(message: types.Message):
             await message.answer("Admin panelga xush kelibsiz 👋🧑🏻", reply_markup=admin_markup)
             await message.delete()
             await adminstate.admin_menu.set()
-
         else:
             await message.answer("Parol noto'g'ri ❌")
     except:

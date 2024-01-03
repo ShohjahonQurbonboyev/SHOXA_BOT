@@ -35,7 +35,6 @@ class adminstate(StatesGroup):
     write = State()
 
 
-
 class adminwebstate(StatesGroup):
     name = State()
     url = State()
@@ -52,3 +51,31 @@ class deletestate(StatesGroup):
 
 class shikoyatstate(StatesGroup):
     shikoyat = State()
+
+
+
+class freelancer(StatesGroup):
+    menu = State()
+    type = State()
+    name = State()
+    surname = State()
+    age = State()
+    technologies = State()
+    country = State()
+    price = State()
+    maqsad = State()
+    tasdiq = State()
+    manage_admin = State()
+
+
+
+class hodim(StatesGroup):
+    idora = State()
+    technology = State()
+    country = State()
+    manager_name = State()
+    time = State()
+    work_time = State()
+    price = State()
+    ex_data = State()
+    tasdiq = State()

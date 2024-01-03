@@ -11,7 +11,7 @@ contact.add(contact_button)
 
 
 
-main_btns = ["📥 Proekt zakaz qilish", "📋 Resume", "🎵 My beats", "📦 Mening proektlarim", "🎦 Kanallar", "🛍 Online shop", "✍️ Taklif yoki shikoyatlar"]
+main_btns = ["📥 Proekt zakaz qilish", "📋 Resume", "🎵 My beats", "📦 Mening proektlarim", "🎦 Kanallar", "📌 Freelancer", "✍️ Taklif yoki shikoyatlar"]
 main_markup = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 for btn in main_btns:
     main_markup.insert(KeyboardButton(btn))
@@ -69,3 +69,10 @@ guruh_buttons = ["Qarindoshlar", "Sinfdoshlar", "🔙 Orqaga"]
 group_markup = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 for guruh in guruh_buttons:
     group_markup.insert(KeyboardButton(guruh))
+
+
+free_btns = ["🏢 Ish joyi kerak", "👥 Hodim kerak"]
+freelance_markup = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+for btn in free_btns + ["🔙 Orqaga"]:
+    freelance_markup.insert(KeyboardButton(btn))
+

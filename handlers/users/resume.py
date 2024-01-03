@@ -1,23 +1,15 @@
 
-import asyncio
 from aiogram import types
-from data.config import ADMINS
-from loader import dp, db, bot
+from loader import dp, bot
 from keyboards.default.main_btn import  main_markup
-from states.main_state import mystate, main
-from aiogram.types import ReplyKeyboardRemove
-from datetime import date, datetime, time
-
-
-
-
+from states.main_state import  main
 
 
 @dp.message_handler(text="📋 Resume", state=main.main_menu)
 async def send_resume(message: types.Message):
     user_id = message.from_user.id
     full_name = message.from_user.full_name
-    file_path = 'docs/My RESUME.pdf'
+    file_path = 'docs/resume.pdf'
     msg = await message.answer("Iltimos kuting...🕒")
     try:
         with open(file_path, 'rb') as f:
