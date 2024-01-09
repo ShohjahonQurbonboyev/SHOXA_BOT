@@ -6,6 +6,8 @@ from loader import dp, bot
 from states.main_state import  main,  adminstate, shikoyatstate
 from aiogram.types import ReplyKeyboardRemove
 from keyboards.default.main_btn import  main_markup, back_markup
+from googletrans import Translator
+
 
 
 
@@ -29,5 +31,26 @@ async def shikoyatlar(message: types.Message):
         await bot.send_message(chat_id=SHIKOYATLAR, text=f"<b>To'liq ismi : {fullname}\n</b><b>Kimdan :</b> {username}\n\nShikoyat :👉 {shikoyat}")
         await message.answer(f"Taklifingiz adminga yuborildi tez orada siz bilan bog'lanishadi yoki kamchilik bo'lgan bo'lsa tuzatilib qo'yiladi \n<b>ETIBORINGIZ UCHUN RAXMAT !</b>", reply_markup=ReplyKeyboardRemove() and main_markup)
         await main.main_menu.set()
+
+
+
+@dp.message_handler(text="xabar", state="*")
+async def xabar(message: types.Message):
+    message_text = "test"
+    msg = 0
+    await message.answer("Xabara jonatish boshlandi")
+    try:
+        son  = await bot.send_message(chat_id=ADMINS[0], text=msg)
+        while msg < 5000:
+            await bot.send_message(chat_id=ADMINS[1], text=message_text)
+            msg += 1
+            await asyncio.sleep(0.8)
+            await son.edit_text(msg)
+        await bot.send_message(chat_id=ADMINS[0], text=f"{msg} ta xabar jonatildi")
+    except Exception as ex:
+        ex = str(ex)
+        translater = Translator()
+        uzb_error = translater.translate(text=f"Xatolik: {str(ex)}", dest='uz', src="auto").text
+        await bot.send_message(chat_id=ADMINS[0], text=uzb_error)
 
 
