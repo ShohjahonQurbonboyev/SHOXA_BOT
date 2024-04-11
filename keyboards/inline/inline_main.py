@@ -23,6 +23,7 @@ for butn in buttn:
 
 
 
+
 tugma_tasdiq = ["✅ To`g`ri", "❌ Xato"]
 resume_change =InlineKeyboardMarkup(row_width=2)
 for tugmalar in tugma_tasdiq:
