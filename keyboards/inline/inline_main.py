@@ -12,7 +12,7 @@ kino_kanal.add(InlineKeyboardButton("🧾 Vakansiyalar", url="https://t.me/vakan
 
 
 github = InlineKeyboardMarkup(row_width=1)
-github.add(InlineKeyboardButton('Github', url='https://github.com/SHOXAonion'))
+github.add(InlineKeyboardButton('Github', url='https://github.com/ShohjahonQurbonboyev'))
 
 
 
@@ -34,5 +34,10 @@ admin_tasdiq = ["✅ Tasdiqlash", "❌ Inkor etish"]
 tasdiq_admin =InlineKeyboardMarkup(row_width=2)
 for tugma in admin_tasdiq:
     tasdiq_admin.insert(InlineKeyboardButton(tugma, callback_data=tugma))
+
+resume_tasdiq_btn = ["Resume jo'natish", "Inkor etish"]
+resume_tasdiq = InlineKeyboardMarkup(row_width=2)
+for resume in resume_tasdiq_btn:
+    resume_tasdiq.insert(InlineKeyboardButton(resume, callback_data=resume))
 
 

@@ -13,7 +13,6 @@ from aiogram.types import ReplyKeyboardRemove
 
 @dp.message_handler(state=adminstate.password, user_id = ADMINS)
 async def confirm_password(message: types.Message):
-    user_id  = message.from_user.id
     parol = str(message.text)
     try:
         if parol == PASSWORD_ADMIN:
@@ -147,13 +146,12 @@ async def add_project(message: types.Message):
        await bot.send_message(message.chat.id, df)
 
 
-
-
 @dp.message_handler(text = "🌇 Reklama", state=adminstate.admin_menu)
 async def add_project(message: types.Message):
     await message.answer("Reklama bo`limiga hush kelibsiz 🫡", reply_markup=ReplyKeyboardRemove())
     await message.answer("Reklama sifatida yubormoqchgi bolgan matningizni kiriting 👇", reply_markup=back_markup)
     await reklamastate.sorov.set()
+
 
 
 @dp.message_handler(state=reklamastate.sorov)
@@ -173,33 +171,23 @@ async def send_ad_to_all(message: types.Message):
 
 
 
-
-@dp.message_handler(text = "✍️ Guruhga yozish", state=adminstate.admin_menu)
+@dp.message_handler(text = "✍️ Xabar jo'natish", state=adminstate.admin_menu)
 async def write(message: types.Message):
-    await message.answer("Qaysi guruhga yozmoqchisiz ?", reply_markup=ReplyKeyboardRemove and group_markup)
-    await adminstate.write_group.set()
-
-
-@dp.message_handler(text = "Qarindoshlar", state=adminstate.write_group)
-async def chose_group(message: types.Message):
-    await message.answer(f"Nima deb yozmoqchisiz ?", reply_markup=ReplyKeyboardRemove() and back_markup)  
+    await message.answer(f"Nima deb yozmoqchisiz ?", reply_markup=ReplyKeyboardRemove() and back_markup)
     await adminstate.write.set()
 
 
 @dp.message_handler(state=adminstate.write)
-async def chose_group(message: types.Message):
-    await bot.send_message(chat_id=1636779278, text= message.text)
+async def sendmessage(message: types.Message):
+    chat_id = message.from_user.id
+    message_text = message.text
+    if chat_id == int(ADMINS[1]):
+        msg_admin1 = await bot.send_message(chat_id=ADMINS[0], text=message_text)
+        await message.answer("Xabar jonatildi ✅")
 
-
-@dp.message_handler(text = "Sinfdoshlar", state=adminstate.write_group)
-async def chose_group(message: types.Message):
-    await message.answer(f"Nima deb yozmoqchisiz ?", reply_markup=ReplyKeyboardRemove() and back_markup)  
-    await adminstate.write.set()
-
-
-@dp.message_handler(state=adminstate.write)
-async def chose_group(message: types.Message):
-    await bot.send_message(chat_id=1636779278, text= message.text)
+    elif chat_id == int(ADMINS[0]):
+        msg = await bot.send_message(chat_id=ADMINS[1], text=message_text)
+        await message.answer("Xabar jonatildi ✅")
 
 
 @dp.message_handler(text = "🗑 O'chirish", state=adminstate.admin_menu)

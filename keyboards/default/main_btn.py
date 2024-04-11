@@ -8,14 +8,19 @@ contact = ReplyKeyboardMarkup(resize_keyboard=True)
 contact.add(contact_button)
 
 
+main_btns = ["📥 Proekt zakaz qilish",
+            "📋 Resume",
+            "🎵 My beats", 
+            "📦 Mening proektlarim", 
+            "🎦 Kanallar", 
+            "📌 Freelancer", 
+            "🤖 GEMINI AI"
+            ]
 
-
-
-main_btns = ["📥 Proekt zakaz qilish", "📋 Resume", "🎵 My beats", "📦 Mening proektlarim", "🎦 Kanallar", "📌 Freelancer", "✍️ Taklif yoki shikoyatlar"]
 main_markup = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 for btn in main_btns:
     main_markup.insert(KeyboardButton(btn))
-
+main_markup.add(KeyboardButton("✍️ Taklif yoki shikoyatlar")) 
 
 btns = ["🤖 Telegram Bot", "💢 Web (Backend)", "🔙 Orqaga"]
 change_markup =  ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
@@ -34,7 +39,7 @@ for my_btn in button:
     my_project_markup.insert(KeyboardButton(my_btn))
 
 
-admin_btn = ["➕ Proekt qo'shish", "👥 Userlar", "🌇 Reklama", "✍️ Guruhga yozish","🗑 O'chirish", "📤 Chiqish"]
+admin_btn = ["➕ Proekt qo'shish", "👥 Userlar", "🌇 Reklama", "✍️ Xabar jo'natish","🗑 O'chirish", "📤 Chiqish"]
 admin_markup = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 for admin in admin_btn:
     admin_markup.insert(KeyboardButton(admin))
@@ -58,7 +63,7 @@ for btn in delete_btn:
     delete_markup.insert(KeyboardButton(btn))
 
 
-guruh_buttons = ["Qarindoshlar", "Sinfdoshlar", "🔙 Orqaga"]
+guruh_buttons = ["Xabar jonatish", "🔙 Orqaga"]
 group_markup = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 for guruh in guruh_buttons:
     group_markup.insert(KeyboardButton(guruh))

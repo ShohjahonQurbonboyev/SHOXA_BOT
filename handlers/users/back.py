@@ -1,8 +1,8 @@
 
 from aiogram import types
 from loader import dp
-from keyboards.default.main_btn import  main_markup, change_markup, back_markup, admin_markup, project_markup, group_markup, freelance_markup
-from states.main_state import shikoyatstate, main, changestate, reklamastate, myprojects, adminstate, adminwebstate, deletestate,adminusrstate, freelancer, hodim
+from keyboards.default.main_btn import  main_markup, change_markup, back_markup, admin_markup, project_markup, freelance_markup
+from states.main_state import shikoyatstate, main, changestate, reklamastate, myprojects, adminstate, adminwebstate, deletestate,adminusrstate, freelancer, hodim, gemini, send_msg
 
 
 
@@ -105,16 +105,10 @@ async def change_back(message: types.Message):
     await main.main_menu.set()
 
 
-@dp.message_handler(text ="🔙 Orqaga", state = adminstate.write_group)
+@dp.message_handler(text ="🔙 Orqaga", state = adminstate.write)
 async def change_back(message: types.Message):
     await message.answer("Siz admin menusidasiz !", reply_markup=admin_markup)
     await adminstate.admin_menu.set()
-
-
-@dp.message_handler(text ="🔙 Orqaga", state = adminstate.write)
-async def change_back(message: types.Message):
-    await message.answer("Qsysi guruhga yozmoqchisiz ?", reply_markup=group_markup)
-    await adminstate.write_group.set()
 
 
 
@@ -212,3 +206,24 @@ async def reklama_back(message: types.Message):
 async def reklama_back(message: types.Message):
     await message.answer("<b>💰 Maosh:</b>\n\nQancha maosh taklif qilasiz ?", reply_markup=back_markup)
     await hodim.price.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=gemini.gemini_chat)
+async def reklama_back(message: types.Message):
+    await message.answer("Siz Asosiy menudasiz 🏠", reply_markup=main_markup)
+    await main.main_menu.set()
+
+
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=send_msg.number_msg)
+async def reklama_back(message: types.Message):
+    await message.answer("Siz Asosiy menudasiz 🏠", reply_markup=main_markup)
+    await main.main_menu.set()
+
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=send_msg.xabar)
+async def reklama_back(message: types.Message):
+    await message.answer("Nima demoqchisiz ?", reply_markup=back_markup)
+    await send_msg.number_msg.set()

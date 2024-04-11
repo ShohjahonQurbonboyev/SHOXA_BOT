@@ -79,3 +79,13 @@ class hodim(StatesGroup):
     price = State()
     ex_data = State()
     tasdiq = State()
+
+
+class gemini(StatesGroup):
+    gemini_chat  = State()
+
+
+
+class send_msg(StatesGroup):
+    number_msg = State()
+    xabar = State()

@@ -13,7 +13,9 @@ CODE_CHANNEL = env.str("CODE_CHANNEL") #codlar kanali
 PASSWORD_ADMIN = env.str("PASSWORD_ADMIN") #Admin panel kod
 SHIKOYATLAR = env.str("SHIKOYATLAR")    
 GURUH = env.str("GURUH")
-VAKANSIYA = env.str("VAKANSIYA")
+VAKANSIYA = env.str("VAKANSIYA")  #Telegram vakansiya kanali
+GEMINI_API  = env.str( "GEMINI_API")   # GEMINI API
+SPEECH_TO_TEXT_API_KEY = env.str("SPEECH_TO_TEXT_API_KEY") # SPEECH TO TEXT API KEY
 
 
 

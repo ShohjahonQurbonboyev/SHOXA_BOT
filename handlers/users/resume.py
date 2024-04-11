@@ -3,8 +3,6 @@ from aiogram import types
 from loader import dp, bot
 from keyboards.default.main_btn import  main_markup
 from states.main_state import  main
-
-
 @dp.message_handler(text="📋 Resume", state=main.main_menu)
 async def send_resume(message: types.Message):
     user_id = message.from_user.id
@@ -18,4 +16,8 @@ async def send_resume(message: types.Message):
         await message.answer("Resume jonatishda xatolik ⚠️")
     await msg.delete()
     await main.main_menu.set()
+
+
+
+
 
