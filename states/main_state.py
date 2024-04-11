@@ -31,7 +31,8 @@ class adminstate(StatesGroup):
     change_prject = State()
     name = State()
     username = State()
-
+    write_group = State()
+    write = State()
 
 
 class adminwebstate(StatesGroup):
@@ -46,3 +47,45 @@ class adminusrstate(StatesGroup):
 class deletestate(StatesGroup):
     change_delete = State()
     delete = State()
+
+
+class shikoyatstate(StatesGroup):
+    shikoyat = State()
+
+
+
+class freelancer(StatesGroup):
+    menu = State()
+    type = State()
+    name = State()
+    surname = State()
+    age = State()
+    technologies = State()
+    country = State()
+    price = State()
+    maqsad = State()
+    tasdiq = State()
+    manage_admin = State()
+
+
+
+class hodim(StatesGroup):
+    idora = State()
+    technology = State()
+    country = State()
+    manager_name = State()
+    time = State()
+    work_time = State()
+    price = State()
+    ex_data = State()
+    tasdiq = State()
+
+
+class gemini(StatesGroup):
+    gemini_chat  = State()
+
+
+
+class send_msg(StatesGroup):
+    number_msg = State()
+    xabar = State()

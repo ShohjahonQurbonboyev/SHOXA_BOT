@@ -1,11 +1,9 @@
-import asyncio
+
 from aiogram import types
-from data.config import ADMINS
-from loader import dp, db, bot
-from keyboards.default.main_btn import  main_markup, change_markup, back_markup, admin_markup, project_markup
-from states.main_state import mystate, main, changestate, reklamastate, myprojects, adminstate, adminwebstate, deletestate,adminusrstate
-from aiogram.types import ReplyKeyboardRemove
-from aiogram.dispatcher.storage import FSMContext
+from loader import dp
+from keyboards.default.main_btn import  main_markup, change_markup, back_markup, admin_markup, project_markup, freelance_markup
+from states.main_state import shikoyatstate, main, changestate, reklamastate, myprojects, adminstate, adminwebstate, deletestate,adminusrstate, freelancer, hodim, gemini, send_msg
+
 
 
 
@@ -98,3 +96,134 @@ async def change_back(message: types.Message):
 async def change_back(message: types.Message):
     await message.answer("Siz admin menusidasiz !", reply_markup=admin_markup)
     await adminstate.admin_menu.set()
+
+
+
+@dp.message_handler(text ="🔙 Orqaga", state = shikoyatstate.shikoyat)
+async def change_back(message: types.Message):
+    await message.answer("Siz admin menusidasiz !", reply_markup=main_markup)
+    await main.main_menu.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state = adminstate.write)
+async def change_back(message: types.Message):
+    await message.answer("Siz admin menusidasiz !", reply_markup=admin_markup)
+    await adminstate.admin_menu.set()
+
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=freelancer.menu)
+async def reklama_back(message: types.Message):
+    await message.answer("Siz Asosiy menudasiz 🏠", reply_markup=main_markup)
+    await main.main_menu.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=freelancer.name)
+async def reklama_back(message: types.Message):
+    await message.answer("Siz qaysi xizmatdan foydalanmoqchisiz ?", reply_markup=freelance_markup)
+    await freelancer.menu.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=freelancer.surname)
+async def reklama_back(message: types.Message):
+    await message.answer("Ismingiz nima ?", reply_markup=back_markup)
+    await freelancer.name.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=freelancer.age)
+async def reklama_back(message: types.Message):
+    await message.answer("Familiyangiz nima ?", reply_markup=back_markup)
+    await freelancer.surname.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=freelancer.technologies)
+async def reklama_back(message: types.Message):
+    await message.answer("Yoshingiz nechchida?", reply_markup=back_markup)
+    await freelancer.age.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=freelancer.country)
+async def reklama_back(message: types.Message):
+    await message.answer("Mutahasisligingiz nima ?", reply_markup=back_markup)
+    await freelancer.technologies.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=freelancer.price)
+async def reklama_back(message: types.Message):
+    await message.answer("Viloyat yoki shaharni yozing ?", reply_markup=back_markup)
+    await freelancer.country.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=freelancer.maqsad)
+async def reklama_back(message: types.Message):
+    await message.answer("sizni qancha maosh qoniqtiradi ?", reply_markup=back_markup)
+    await freelancer.price.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=hodim.idora)
+async def reklama_back(message: types.Message):
+    await message.answer("Siz qaysi xizmatdan foydalanmoqchisiz ?", reply_markup=freelance_markup)
+    await freelancer.menu.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=hodim.technology)
+async def reklama_back(message: types.Message):
+    await message.answer("🏢 Idora nomi ?", reply_markup=back_markup)
+    await hodim.idora.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=hodim.country)
+async def reklama_back(message: types.Message):
+    await message.answer("<b>📚 Texnologiya:</b>\n\nTalab qilinadigan texnologiyalarni kiriting? ", reply_markup=back_markup)
+    await hodim.technology.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=hodim.manager_name)
+async def reklama_back(message: types.Message):
+    await message.answer("<b>🌐 Hudud:</b>\n\nQaysi hududdansiz?\nViloyat nomi, Toshkent shahar yoki Respublikani kiriting.", reply_markup=back_markup)
+    await hodim.country.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=hodim.time)
+async def reklama_back(message: types.Message):
+    await message.answer("<b>✍️Mas'ul ism sharifi ?</b>", reply_markup=back_markup)
+    await hodim.manager_name.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=hodim.work_time)
+async def reklama_back(message: types.Message):
+    await message.answer("<b>🕰 Murojaat qilish vaqti:\n\n</b>Qaysi vaqtda murojaat qilish mumkin?\n<i>Masalan, 9:00 - 18:00</i>", reply_markup=back_markup)
+    await hodim.time.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=hodim.price)
+async def reklama_back(message: types.Message):
+    await message.answer("<b>Ish vaqti:</b>\n\n<i>Masalan: 9:00 - 18:00</i>", reply_markup=back_markup)
+    await hodim.work_time.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=hodim.ex_data)
+async def reklama_back(message: types.Message):
+    await message.answer("<b>💰 Maosh:</b>\n\nQancha maosh taklif qilasiz ?", reply_markup=back_markup)
+    await hodim.price.set()
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=gemini.gemini_chat)
+async def reklama_back(message: types.Message):
+    await message.answer("Siz Asosiy menudasiz 🏠", reply_markup=main_markup)
+    await main.main_menu.set()
+
+
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=send_msg.number_msg)
+async def reklama_back(message: types.Message):
+    await message.answer("Siz Asosiy menudasiz 🏠", reply_markup=main_markup)
+    await main.main_menu.set()
+
+
+
+@dp.message_handler(text ="🔙 Orqaga", state=send_msg.xabar)
+async def reklama_back(message: types.Message):
+    await message.answer("Nima demoqchisiz ?", reply_markup=back_markup)
+    await send_msg.number_msg.set()

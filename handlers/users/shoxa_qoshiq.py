@@ -1,11 +1,9 @@
 
-import asyncio
 from aiogram import types
-from data.config import ADMINS
-from loader import dp, db, bot
+from loader import dp, bot
 from keyboards.default.main_btn import  main_markup
 from states.main_state import mystate, main
-from aiogram.types import ReplyKeyboardRemove
+
 
 
 

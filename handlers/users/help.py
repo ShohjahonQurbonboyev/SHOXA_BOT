@@ -9,5 +9,6 @@ async def bot_help(message: types.Message):
     text = ("Buyruqlar: ",
             "/start - Botni qayta ishga tushirish",
             "/help - Yordam",
-            "/admin - Admin panel")
+            "/admin - Admin panel",
+            "/version - Versiya")
     await message.answer("\n".join(text))
