@@ -12,7 +12,6 @@ PROJECT_CHANNEL = env.str("PROJECT_CHANNEL") #Zakaz proyektlar kanali
 CODE_CHANNEL = env.str("CODE_CHANNEL") #codlar kanali
 PASSWORD_ADMIN = env.str("PASSWORD_ADMIN") #Admin panel kod
 SHIKOYATLAR = env.str("SHIKOYATLAR")    
-# GURUH = env.str("GURUH")
 VAKANSIYA = env.str("VAKANSIYA")  #Telegram vakansiya kanali
 LINK_GROUP = env.str("LINK_GROUP")
 
