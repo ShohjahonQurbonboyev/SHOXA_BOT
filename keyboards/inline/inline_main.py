@@ -8,7 +8,7 @@ for button in btn:
 
 
 kino_kanal = InlineKeyboardMarkup(row_width=2)
-kino_kanal.add(InlineKeyboardButton("🧾 Vakansiyalar", url="https://t.me/vakans_uzb")),
+kino_kanal.add(InlineKeyboardButton("🧾 Vakansiyalar", url="https://t.me/+GJf4CJrE7603NTky")),
 
 
 github = InlineKeyboardMarkup(row_width=1)
